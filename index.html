@@ -1,100 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>netflix intro</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <style>
-        body{
-            margin:0;
-            background-color: rgb(23, 20, 20);
-            overflow: hidden;
-        }
-        .netflix-intro
-        {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height:100vh;
-        }
-        .logo-container
-        {
-            display: flex;
-            gap:0.5rem;
-        }
-        .letter{
-            font-size: 4rem;
-            font-weight: bold;
-            color:red;
-            opacity: 0;
-            transform: scale(0.8);
-            animation: fadeInscale 1s ease-in-out forwards;
-        }
-        .letter:nth-child(1)
-        {
-            animation-delay: 0.2s;
-        }
-        .letter:nth-child(2)
-        {
-            animation-delay: 0.4s;
-        }.letter:nth-child(3)
-        {
-            animation-delay: 0.6s;
-        }.letter:nth-child(4)
-        {
-            animation-delay: 0.8s;
-        }.letter:nth-child(5)
-        {
-            animation-delay: 1s;
-        }.letter:nth-child(6)
-        {
-            animation-delay: 1.2s;
-        }.letter:nth-child(7)
-        {
-            animation-delay: 1.4s;
-        }
-        @keyframes fadeInscale
-        {
-            0%{
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            100%{
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="netflix-intro">
-        <div class="logo-container"><span  class="letter">N</span>
-        </span>
-            <span  class="letter">E</span>
-            <span class="letter">T</span>
-            <span class="letter">F</span>
-            <span class="letter">L</span>
-            <span class="letter">I</span>
-            <span class="letter">X</span></div>
-    </div>
-    <audio id="sound" src="netflix.mp3" controls ></audio>
-    <script>
-        window.addEventListener('DOMContentLoaded',()=>{
-            const introSound=document.getElementById('sound');
-                introSound.play().catch(()=>{
-                    console.log("Autoplay blocked.waiting for user interaction...");
-                    document.body.addEventListener('click',()=>{
-                        introSound.play()
-                        .then(()=> console.log("Audio started after user interaction."))
-                        .catch(err=>console.error("error playing audio:",err));
-                    },{once:true});
-                    })
-                });
-                
-            
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        </script>
-    
+<title>Netflix Intro</title>
+
+<style>
+
+body{
+    margin:0;
+    background:black;
+    overflow:hidden;
+}
+
+.netflix-intro{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    cursor:pointer;
+}
+
+.logo-container{
+    display:flex;
+    gap:8px;
+}
+
+.letter{
+    font-size:5rem;
+    font-weight:bold;
+    color:red;
+    opacity:0;
+    transform:scale(0.8);
+    animation:fadeIn 1s ease forwards;
+}
+
+.letter:nth-child(1){ animation-delay:0.2s; }
+.letter:nth-child(2){ animation-delay:0.4s; }
+.letter:nth-child(3){ animation-delay:0.6s; }
+.letter:nth-child(4){ animation-delay:0.8s; }
+.letter:nth-child(5){ animation-delay:1s; }
+.letter:nth-child(6){ animation-delay:1.2s; }
+.letter:nth-child(7){ animation-delay:1.4s; }
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:scale(0.8);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="netflix-intro" id="intro">
+
+    <div class="logo-container">
+
+        <span class="letter">N</span>
+        <span class="letter">E</span>
+        <span class="letter">T</span>
+        <span class="letter">F</span>
+        <span class="letter">L</span>
+        <span class="letter">I</span>
+        <span class="letter">X</span>
+
+    </div>
+
+</div>
+
+<audio id="sound">
+    <source src="./net.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+const audio = document.getElementById("sound");
+
+console.log(audio);
+
+audio.addEventListener("error", () => {
+    document.getElementById("test").innerHTML = "Audio failed to load";
+});
+
+audio.addEventListener("canplay", () => {
+    document.getElementById("test").innerHTML = "Audio loaded successfully";
+});
+
+document.body.addEventListener("click", () => {
+    audio.play();
+});
+
+</script>
+
 </body>
 </html>
